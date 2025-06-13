@@ -14,3 +14,5 @@ Smash bricks, bounce balls, and don't let it fall! 😤
 
 ## Author
 Made with sweat & code by Nabhaan 💪
+
+click here to play -> https://nabhaan-a.github.io/Ball-Breaker/
