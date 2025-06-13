@@ -1,4 +1,8 @@
 // Grab canvas and context
+const brickHitSound = new Audio("Brickhit.wav");
+const paddleHitSound = new Audio("paddlehit.wav");
+const gameOverSound = new Audio("gameover.wav");
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 let score = 0;
@@ -55,6 +59,7 @@ function collisionDetection() {
           dy = -dy;
           b.status = 0;
           score += 5;
+          brickHitSound.play();
         }
       }
     }
@@ -146,9 +151,11 @@ function draw() {
   // ✅ BALL HITS BOTTOM
   if (y + dy > canvas.height - ballRadius) {
     if(x > paddleX && x < paddleX + paddleWidth){
+      paddleHitSound.play();
       dy = -dy;
     }
     else{
+      gameOverSound.play();
       console.log("BOTTOM HIT 💀");
       alert("GAME OVER 💀");
       return; // exit the draw loop
