@@ -156,9 +156,12 @@ function draw() {
     }
     else{
       gameOverSound.play();
-      console.log("BOTTOM HIT 💀");
-      alert("GAME OVER 💀");
-      return; // exit the draw loop
+      console.log("GAME OVER");
+      ctx.font = "48px Arial";
+      ctx.fillStyle = "red";
+      ctx.textAlign = "center";
+      ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      return;
     }
   }
 
