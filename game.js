@@ -73,6 +73,7 @@ function collisionDetection() {
 }
 
 function drawScore(){
+  ctx.textAlign = "left"; 
   ctx.font="16px Arial";
   ctx.fillStyle = "#fff";
   ctx.fillText("Score: " + score,8, 20);
@@ -131,6 +132,43 @@ function drawPaddle() {
 const bgImage = new Image();
 bgImage.src = "backgroundbrick.jpg"; // Make sure this path matches your image file
 
+let gameOver = false;
+
+function resetGame() {
+  // Reset all variables to initial state
+  score = 0;
+  x = canvas.width / 2;
+  y = canvas.height - 30;
+  dx = 3;
+  dy = -3;
+  paddleX = (canvas.width - paddleWidth) / 2;
+  // Reset bricks
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
+      bricks[c][r].status = 1;
+    }
+  }
+  gameOver = false;
+  draw();
+}
+
+// Listen for mouse clicks on the canvas
+canvas.addEventListener("click", function (e) {
+  if (gameOver) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    // Check if click is inside the Try Again button
+    if (
+      mouseX > canvas.width / 2 - 75 &&
+      mouseX < canvas.width / 2 + 75 &&
+      mouseY > canvas.height / 2 + 90 &&
+      mouseY < canvas.height / 2 + 140
+    ) {
+      resetGame();
+    }
+  }
+});
 // Update game frame
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -159,6 +197,7 @@ function draw() {
     }
     else{
       gameOverSound.play();
+      gameOver = true;
       console.log("GAME OVER");
       ctx.font = "48px comic sans ms";
       ctx.fillStyle = "red";
@@ -168,6 +207,13 @@ function draw() {
       ctx.font = "35px comic sans ms";
       ctx.fillStyle = "yellow";
       ctx.fillText("SCORE : " + score, canvas.width / 2, canvas.height / 2 + 50);
+      
+      ctx.fillStyle = "transparent";
+      ctx.fillRect(canvas.width / 2 - 75, canvas.height / 2 + 90, 150, 50);
+      ctx.font = "28px comic sans ms";
+      ctx.fillStyle = "#fff";
+      ctx.fillText("Try Again", canvas.width / 2, canvas.height / 2 + 125);
+  
       return;
     }
   }
