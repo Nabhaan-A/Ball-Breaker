@@ -1,4 +1,4 @@
-# Ball-Breaker 🎮🧱
+# Brick-Breaker 🎮🧱
 
 A fun Brick Breaker game made using HTML5 Canvas and JavaScript.  
 Smash bricks, bounce balls, and don't let it fall! 😤
