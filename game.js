@@ -123,15 +123,18 @@ function keyUpHandler(e){
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = "grey";
   ctx.fill();
   ctx.closePath();
 }
 
+const bgImage = new Image();
+bgImage.src = "backgroundbrick.jpg"; // Make sure this path matches your image file
 
 // Update game frame
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height); // Draw background image
   drawBricks();
   drawBall();
   drawPaddle();
@@ -157,10 +160,14 @@ function draw() {
     else{
       gameOverSound.play();
       console.log("GAME OVER");
-      ctx.font = "48px Arial";
+      ctx.font = "48px comic sans ms";
       ctx.fillStyle = "red";
       ctx.textAlign = "center";
       ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      console.log("SCORE : " + score);
+      ctx.font = "35px comic sans ms";
+      ctx.fillStyle = "yellow";
+      ctx.fillText("SCORE : " + score, canvas.width / 2, canvas.height / 2 + 50);
       return;
     }
   }
